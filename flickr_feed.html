@@ -27,23 +27,26 @@
     </div>
 
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
 <script language="javascript" type="text/javascript">
+    //Functions to run on load of the HTML.
     function runFunctions() {
         getJSON();
         insertRows();
     }
 
+    //Get the JSON object from the URL provided.
     function getJSON() {
         fetch('https://api.flickr.com/services/feeds/photos_public.gne', { mode: 'no-cors' }) // Call the fetch function passing the url of the API as a parameter
             .then(function (response) {
                 response.text()
                     .then(function (data) {
-                        alert(data)
+                        //alert(data), here I would expect to be able to use 
+                        //data from the URL to populate my table above.
                     })
             })
     }
 
+    //Url provided hold 20 pictures. This creates 20 rows in the HTML table above.
     function insertRows() {
         for (i = 1; i < 20; i++) {
             var table = document.getElementById("myTable");
