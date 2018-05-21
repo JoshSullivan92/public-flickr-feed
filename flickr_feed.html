@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <meta charset="UTF-8"> 
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <title>
-            Josh Sullivan Flickr Test
-        </title>
-    </head>
+<meta charset="UTF-8">
 
-    <body onload="runFunctions()">
-        <h1>
-            Flickr Public Feed
-        </h1>
-        <div>
-            <table id="myTable">
-                <tr>
-                    <td id=column1>
-                        PhotoCol
-                    </td>
-                    <td id=column2>
-                        Description Test
-                    </td>
-                </tr>
-            </table>
-        </div>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>
+        Josh Sullivan Flickr Test
+    </title>
+</head>
 
-    </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
-    <script language="javascript" type="text/javascript">
-        function runFunctions(){
-            getJSON();
-            insertRows();
-        }
+<body onload="runFunctions()">
+    <h1>
+        Flickr Public Feed
+    </h1>
+    <div>
+        <table id="myTable">
+            <tr>
+                <td id=column1>
+                    PhotoCol
+                </td>
+                <td id=column2>
+                    Description Test
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        function getJSON(){
-            fetchJsonp('https://api.flickr.com/services/feeds/photos_public.gne') // Call the fetch function passing the url of the API as a parameter
-                .then(function(response){
-                    response.json()
-                    .then(function(data){
-                    alert(data)
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
+<script language="javascript" type="text/javascript">
+    function runFunctions() {
+        getJSON();
+        insertRows();
+    }
+
+    function getJSON() {
+        fetch('https://api.flickr.com/services/feeds/photos_public.gne', { mode: 'no-cors' }) // Call the fetch function passing the url of the API as a parameter
+            .then(function (response) {
+                response.text()
+                    .then(function (data) {
+                        alert(data)
                     })
-                })
-        }
+            })
+    }
 
-        function insertRows() {
-            for(i=1; i<20; i++){
-                var table = document.getElementById("myTable");
-                var row = table.insertRow(i);
-                var cellA = row.insertCell();
-                var cellB = row.insertCell();
-                cellA.setAttribute("id", "column1", 0);
-                cellB.setAttribute("id", "column2", 0);
-                cellA.innerHTML = "PhotoCol "+(i+1);
-                cellB.innerHTML = "Description Test "+(i+1);
-            }
+    function insertRows() {
+        for (i = 1; i < 20; i++) {
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(i);
+            var cellA = row.insertCell();
+            var cellB = row.insertCell();
+            cellA.setAttribute("id", "column1", 0);
+            cellB.setAttribute("id", "column2", 0);
+            cellA.innerHTML = "PhotoCol " + (i + 1);
+            cellB.innerHTML = "Description Test " + (i + 1);
         }
-    </script>
+    }
+</script>
+
 </html>
